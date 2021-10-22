@@ -1,0 +1,128 @@
+@import url(hero.css);
+
+:root {
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: rgb(33, 175, 144);
+  --ifm-color-primary-darker: rgb(31, 165, 136);
+  --ifm-color-primary-darkest: rgb(26, 136, 112);
+  --ifm-color-primary-light: rgb(70, 203, 174);
+  --ifm-color-primary-lighter: rgb(102, 212, 189);
+  --ifm-color-primary-lightest: rgb(146, 224, 208);
+  --ifm-code-font-size: 95%;
+
+  --flbx-spacing-vertical: 60px;
+  --flbx-section-background-color: #000;
+}
+
+@media (max-width: 996px) {
+  :root {
+    --flbx-spacing-vertical: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  :root {
+    --flbx-spacing-vertical: 10px;
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1) {
+  :root {
+    --ifm-line-height-base: 1.85;
+  }
+}
+
+img[alt^=Support] {
+  width: 20px;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.pluginLogosSection {
+  padding: 1rem 0;
+  width: 100%;
+}
+
+.pluginLogosSection h3 {
+  text-align: center;
+  font-size: 1.7em;
+  font-weight: 500;
+}
+
+.main-wrapper .markdown p > a,
+.main-wrapper .container p > a {
+  background-color: var(--wdio-link-background-color);
+  color: var(--wdio-link-color);
+  text-decoration: none!important;
+  border-bottom: 1px solid var(--ifm-color-primary);
+  padding: 2px;
+}
+.main-wrapper .container .admonition p > a {
+  background-color: transparent;
+  color: inherit;
+  text-decoration: underline!important;
+  border-bottom: 0;
+}
+
+.row {
+  padding-bottom: 20px;
+}
+
+.main-wrapper .markdown p > a:hover,
+.main-wrapper .container p > a:hover {
+  color: var(--ifm-color-primary)
+}
+
+article thead {
+  background-color: var(--ifm-table-border-color);
+  font-family: 'IBM Plex Mono';
+  text-align: left;
+}
+
+h1, h2, h3 {
+  font-weight: 400;
+}
+
+.highlightSection .token-line {
+  font-size: 80%!important
+}
+
+.highlightSection .prism-code:before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background: #ff5f56;
+  display: block;
+  border-radius: 50%;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.highlightSection .prism-code:after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background: #ffbd2e;
+  display: block;
+  border-radius: 50%;
+  position: absolute;
+  top: 12px;
+  left: 32px;
+}
+
+.highlightSection .prism-code > div {
+  padding-top: calc(var(--ifm-pre-padding) + 5px);
+}
+
+.highlightSection .prism-code > code:before {
+  content: "";
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: #27C941;
+  border-radius: 50%;
+  position: absolute;
+  top: 12px;
+  left: 52px;
+}

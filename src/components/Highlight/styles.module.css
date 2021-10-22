@@ -1,0 +1,16 @@
+.featureTitle {
+    font-size: 36px;
+    font-weight: 500;
+}
+
+.featureImage {
+    height: 100%;
+}
+
+.featureImage iframe {
+    width: 100%;
+}
+
+.darkSection {
+    background-color: var(--flbx-dark-section-background-color);
+}

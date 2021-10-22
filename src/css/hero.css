@@ -1,0 +1,15 @@
+.hero--primary {
+    --ifm-hero-background-color: #00a0ff;
+    --ifm-hero-text-color: #fff;
+}
+
+.hero__title {
+    color: fff;
+}
+
+.hero__subtitle {
+    font-size: 2em;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+}
