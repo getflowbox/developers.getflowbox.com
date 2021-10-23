@@ -11,6 +11,7 @@ const sidebars = {
       items: [
         'quickstart',
         'localization',
+        'analytics',
         'performance',
       ],
     },
