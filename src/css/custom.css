@@ -8,6 +8,7 @@
   --ifm-color-primary-light: rgb(70, 203, 174);
   --ifm-color-primary-lighter: rgb(102, 212, 189);
   --ifm-color-primary-lightest: rgb(146, 224, 208);
+  --ifm-color-secondary-contrast-background: rgb(254, 249, 231);
   --ifm-code-font-size: 95%;
 
   --flbx-spacing-vertical: 60px;
@@ -73,9 +74,14 @@ img[alt^=Support] {
   color: var(--ifm-color-primary)
 }
 
+table {
+  width:100%;
+  display: table;
+}
+
 article thead {
   background-color: var(--ifm-table-border-color);
-  font-family: 'IBM Plex Mono';
+  font-family: inherit;
   text-align: left;
 }
 

@@ -7,6 +7,7 @@ To display a Flow you've created in Flowbox you need to add a small snippet to y
 
 Start out by including the `flowbox.js`  script on your page. Copy this snippet and paste it in the `<head>` element
 
+#### Embed snippet
 ```html
 <head>
 <title>My webpage</title>
@@ -24,6 +25,7 @@ Start out by including the `flowbox.js`  script on your page. Copy this snippet 
 
 Then, you can go ahead and use the `window.flowbox` function to display your Flows. To render a Flow on your webpage, copy and paste this snippet wherever you want the Flow to show up
 
+#### Embed init snippet
 ```html
 <div id="js-flowbox-flow"></div>
 <script>
@@ -34,11 +36,8 @@ Then, you can go ahead and use the `window.flowbox` function to display your Flo
 </script>
 ```
 
-* *The container* property refers to an element on your page, in this case the div  element with id `js-flowbox-flow`.
-
-* The *key* property is the Flow key. The easiest way to find this is by copying it from the "Copy Flow Key" option in the meatball (three-dot) menu in Moderate in Flowbox:
-
-![Copy Flow Key](/img/docs/copy_flow_key.png)
+* The `container` property refers to an element on your page, in this case the div  element with id `js-flowbox-flow`.
+* The `key` property is the [Flow key](/docs/terminology#flow-key).
 
 ## Content Security Policy (CSP) Error
 

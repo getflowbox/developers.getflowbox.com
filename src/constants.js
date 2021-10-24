@@ -19,39 +19,39 @@ export const pluginsLogos = [{
 }, {
   img: 'bigcommerce.png',
   alt: 'BigCommerce',
-  url: '#'
+  url: 'https://www.bigcommerce.com/'
 }, {
   img: 'jetshop.png',
   alt: 'Jetshop',
-  url: '#'
+  url: 'https://www.jetshop.se/partners/'
 }, {
   img: 'woocommerce.png',
   alt: 'WooCommerce',
-  url: '#'
+  url: 'https://woocommerce.com/'
 }, {
   img: 'askas.png',
   alt: 'Askås',
-  url: '#'
+  url: 'https://www.askas.se/sv/e-handelslosningar.html'
 }, {
   img: 'spryker.png',
   alt: 'Spryker',
-  url: '#'
+  url: 'https://spryker.com/en/technology-partner-category/social-media/'
 }, {
   img: 'vue.png',
   alt: 'Vue Storefront',
-  url: '#'
+  url: 'https://www.vuestorefront.io/'
 }, {
   img: 'viskan.png',
   alt: 'VISKAN',
-  url: '#'
+  url: 'https://www.viskan.com/'
 }, {
   img: 'visma.png',
   alt: 'VISMA',
-  url: '#'
+  url: 'http://visma.com/'
 }, {
   img: 'vendre.png',
   alt: 'Vendre',
-  url: '#'
+  url: 'http://support.vendre.io/i/appar-integration/socialt-marknadsforing/flowbox.html'
 }]
 
 export const EmbedIntegration1 = `

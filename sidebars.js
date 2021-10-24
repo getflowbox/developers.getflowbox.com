@@ -4,6 +4,7 @@
 const sidebars = {
   docs: [
     'overview',
+    'terminology',
     {
       type: 'category',
       label: 'Widget Integration',
@@ -12,6 +13,7 @@ const sidebars = {
         'quickstart',
         'localization',
         'analytics',
+        'browsersupport',
         'performance',
       ],
     },
