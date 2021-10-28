@@ -43,7 +43,7 @@ function HomepageFeatures() {
       </section>
       <Highlight
         img={
-          <CodeBlock className="html" children={EmbedIntegration1}></CodeBlock>
+          <CodeBlock className="language-html">{EmbedIntegration1}</CodeBlock>
         }
         isDark
         title="Get started with Flowbox within minutes"
@@ -62,7 +62,7 @@ function HomepageFeatures() {
       <div className="row"/>
       <Highlight
         img={
-          <CodeBlock className="html" children={EmbedIntegration2}></CodeBlock>
+          <CodeBlock className="language-html">{EmbedIntegration2}</CodeBlock>
         }
         reversed
         title="Display a flow anywhere on your site"
