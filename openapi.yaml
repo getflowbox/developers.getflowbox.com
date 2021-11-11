@@ -248,11 +248,16 @@ info:
 tags:
   - name: "Flow API"
     description: Endpoints to work with Flows
+  - name: "Asset API"
+    description: Endpoints to work with Assets
 
 x-tagGroups:
   - name: Flow API
     tags:
       - "Flow API"
+  - name: Asset API
+    tags:
+      - "Asset API"
 
 paths:
   # ##############################################
@@ -274,14 +279,54 @@ paths:
               schema:
                 $ref: "#/components/schemas/Flow"
 
+  # ##############################################
+  # GET /v1/asset/<ASSETKEY>
+  # ##############################################
+  /v1/asset/{assetKey}:
+    get:
+      tags:
+        - "Asset API"
+      summary: Return an Asset
+      operationId: Return Asset
+      description: |
+        This resource is used to return an Asset for a Company. etc, etc..
+      parameters:
+        - in: path
+          name: company_id
+          schema:
+            type: string
+        - in: path
+          name: product_id
+          schema:
+            type: string
+        - in: path
+          name: post_index
+          schema:
+            type: string
+        - in: path
+          name: catalog
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the asset corresponding to the supplied key
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Asset"
+
 components:
   schemas:
+    # ##############################################
+    # SCHEMA Asset
+    # ##############################################
+    Asset:
+      type: object
+
     # ##############################################
     # SCHEMA Flow
     # ##############################################
     Flow:
-      required:
-        - vat_numbers
       type: object
       properties:
         posts:
