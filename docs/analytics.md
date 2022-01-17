@@ -84,6 +84,6 @@ Don't add any `"` or `'` in the products: line. Keep it similar to what is state
 
 :::caution
 
-If you see an error message that states that the Flowbox checkout script could not load due to Content Security Policy, you will need to add Flowbox to your CDN whitelist. Read [here](/docs/quickstart#content-security-policy-csp-error) for how to do it.
+If you see an error message that states that the Flowbox checkout script could not load due to Content Security Policy, you will need to add Flowbox to your CDN whitelist. Read [here](/docs/csp) for how to do it.
 
 :::

@@ -26,6 +26,15 @@ const config = {
         },
       }),
     ],
+    [
+      'redocusaurus',
+      {
+        specs: [{
+          routePath: '/api/',
+          spec: 'openapi.yaml',
+        }],
+      }
+    ],
   ],
 
   themeConfig:
@@ -51,8 +60,7 @@ const config = {
             label: 'Guides',
           },
           {
-            type: 'doc',
-            docId: 'api/overview',
+            to: 'api',
             position: 'left',
             label: 'API Reference',
           },

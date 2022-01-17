@@ -1,0 +1,499 @@
+---
+openapi: 3.0.1
+
+servers:
+  - url: https://gateway.getflowbox.com
+    description: Production environment
+  - url: https://api.sandbox.flbx.io
+    description: Sandbox environment
+info:
+  title: Flowbox Developer API
+  version: v1
+  description: |
+    # Introduction
+    This document is intended for developers and others who are interested in integrating with [Flowbox](https://www.getflowbox.com). Questions can be sent to [developer@getflowbox.com](mailto:developer@getflowbox.com).
+    If anything is missing or seems incorrect, please check the [GitHub issues](https://github.com/getflowbox/developers.getflowbox.com/issues) for existing known issues or [create a new issue](https://github.com/getflowbox/developers.getflowbox.com/issues/new).
+
+    ## Introduction to API integration
+    The Flowbox API is organized around [REST](http://en.wikipedia.org/wiki/Representational_State_Transfer). Our API has predictable,
+    resource-oriented URLs, and uses HTTP response codes to indicate API errors.
+
+    ## Policy for Personal Information in the metadata
+    It is not allowed to include so called sensitive personal data in any of the free-text metadata fields.
+
+    Sensitive personal data includes the data referred to in article 9.1. GDPR (data concerning racial or ethnic origin,
+    political opinions, religious or philosophical beliefs, membership of a trade union, health, a person's sex life or
+    sexual orientation, genetic data, biometric data that is being used to uniquely identify a person).
+
+    The integrator is responsible for ensuring no sensitive personal data is included in any of the free-text metadata fields.
+
+    # Change Mangement
+    The Flowbox API is continuously improved and new features may be added at any time. Major changes are announced
+    via the [Flowbox Status](https://status.getflowbox.com) service.
+
+    Disruptive changes in the API that may break existing integrations, as for instance removal of an older version of an API endpoint, are announced via [Flowbox Status](https://status.getflowbox.com) at least 6 months before the change becomes operative.
+
+    We strongly recommend to subscribe to [Flowbox Status](https://status.getflowbox.com) in order to get updates around service disruptions.
+
+    ## Changelog
+    List changes to the API documentation.
+
+    | Date         | Details of changes               |
+    | ------------ | -------------------------------- |
+    | 2021-12-24   | Release of Flowbox API Version 1 |
+
+    # Conventions
+    ## Date & Time
+    Flowbox encodes and decodes all dates and times as [ISO 8601](http://www.w3.org/TR/NOTE-datetime) values. The format looks like `YYYY-MM-DDThh:mm:ss.sTZD`, example `1970-01-01T23:25:10.0330000+01:00` where:
+
+    * `YYYY`, The year including century
+    * `MM`, Month
+    * `DD`, Day
+    * `T`, Separator
+    * `hh`, Zero-padded hour between `00` and `24` (where `24` is only used to notate midnight at the end of a calendar day)
+    * `mm`, Zero-padded minutes between `00` and `59`
+    * `ss`, Zero-padded second between `00` and `60` (where `60` is only used to notate an added leap second)
+    * `s`, one or more digits representing a decimal fraction of a second
+    * `TZD`, Time zone designator (`Z` or `+hh:mm` or `-hh:mm`)
+
+    ## UTC
+    If the time is in UTC, add a `Z` directly after the time without a space. `Z` is the zone designator for the zero UTC offset. `09:30 UTC` is therefore represented as `09:30Z` or `0930Z`. `14:45:15 UTC` would be `14:45:15Z` or `144515Z`. UTC time is also known as 'Zulu' time, since 'Zulu' is the NATO phonetic alphabet word for `Z`.
+
+    The offset from UTC is given in the format `±[hh]:[mm]`, `±[hh][mm]`, or `±[hh]`. So if the time being described is one hour ahead of UTC (such as the time in Stockholm during the winter), the zone designator would be `+01:00`, `+0100`, or simply `+01`. This is appended to the time in the same way that `Z` was above. The offset from UTC changes with daylight saving time, e.g. a time offset in Chicago, would be `-06:00` for the winter (Central Standard Time) and `-05:00` for the summer (Central Daylight Time).
+
+    ## Media types
+    The [IANA](http://www.iana.org/assignments/media-types/media-types.xhtml) media types, e.g. "application/pdf"
+
+    ## UTF-8 encoding
+    All data sent to Flowbox needs to be [UTF-8](http://en.wikipedia.org/wiki/UTF-8) encoded.
+
+    ## Currency
+    All places where currency is specified, [ISO4217](https://en.wikipedia.org/wiki/ISO_4217) should be used.
+
+    ## Country code
+    Where applicable Flowbox uses a country code to determine certain formats. The country code should always be supplied using the [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) alpha-2 two-letter code.
+
+    # Limits
+    Flowbox handles millions of requests every day. We put limits to protect the system and to ensure an equitable distribution of system resources. There’s also various practical reasons for this, such as reducing Head-of-line blocking and providing a optimal experience for the enduser.
+
+    Our policies are as follows and are subject to change.
+
+    ### Rate limit
+    ???
+
+    # Interacting with the API
+    All API access is performed over HTTPS through `api.flbx.io` or `api.sandbox.flbx.io` and data is sent and received as [JSON](http://www.json.org/). For trying out the API without touching live data we’ve set up a sandbox environment.
+    In order to ensure data privacy the following choices have been made, to name some that directly impact API workflows:
+    Unencrypted HTTP is not supported, you will be redirected to the resource you tried to reach, with http replaced by https, if you attempt to use plain HTTP.
+    Resources you have no right to see will either give you a describing status code or a `404`. `404` statuses are returned if the case is such that you don’t even have the right to know, according to the system's current state, if an object exists.
+
+    ## API Endpoints
+    Flowbox uses different endpoints for production and testing as described below. We also provide the current IP addresses that *could* serve API requests, the current DNS-record will provide an up-to-date list with active endpoints. This is not meant to be a complete list of Flowbox-maintained IP addresses. Please make sure to **always** access the Flowbox API using the correct domain-name and environment instead of relying on IP addresses.
+
+    Flowbox maintains a infrastructure, which grows dynamically to accommodate increasing demand. As a result, Flowbox API servers use a range of IP addresses, and the addresses often change.
+
+    *Please note that we do not recommend managing firewall restrictions by IP address, as the IPs associated with these domains are not static.*
+
+    <aside class="notice">
+    All interaction with Flowbox's APIs must be done over HTTPS.
+    </aside>
+
+    ### Production environment
+    The API endpoint for the production environment can be found at
+
+    `https://gateway.getflowbox.com`
+
+    The production environment should only be used for sending real data, not for testing of any sort. For testing, please refer to Sandbox.
+
+    ### Sandbox environment
+    The API for the sandbox environment can be found at
+
+    `https://api.sandbox.flbx.io`
+
+    The sandbox is not to be used with any critical or production data. We make no guarantees as to the availability of the service, or the data stored by it.
+
+    We usually deploy the latest production environment to our Sandbox, but may occasionally update it with newer builds, which may not be as reliable or well tested.
+
+    ## URL Components
+    When constructing resource identifiers (URIs) it is best to consider them as being built with up to four discrete units. I.e. `Endpoint+Version+Resource+[Parameters]`, e.g. `https://api.sandbox.flbx.io/v1/flow/<FLOWKEY>?postsPerPage=29`
+
+    ### Endpoint
+
+    - `https://gateway.getflowbox.com` - for Production
+    - `https://api.sandbox.flbx.io` - for Sandbox
+
+    ### Resource
+    `/public/feed/FLOWKEY`
+
+    ### Parameters
+    `/?QUERYSTRING`
+
+    ## Unit Fields
+    The units have parameterized fields, which allow you to change their respective meanings, those fields are briefly described below.
+
+    ### KEY
+    The identifier of an object in a collection, its ID, if you will.
+
+    ### QUERYSTRING
+    A set of key-value pairs, used for filtering and setting options on collections.
+
+    ## HTTP Verbs
+    Where possible, the Flowbox API strives to use appropriate HTTP verbs for each action. The terms verb and method are used interchangingly.
+
+    ### Idempotency
+    The API supports idempotency for safely retrying requests without accidentally performing the same operation twice. For example, if a request that is idempotent fails due to a network connection error, you can safely retry the request.
+
+    `GET` and `DELETE` requests are idempotent by definition, meaning that the same backend work will occur no matter how many times the same request is issued. You shouldn't send an idempotency key with these verbs because it will have no effect.
+
+    In short, this means that making a request with an idempotent verb only changes the state of the data the first time the request is made.
+
+    ## Methods
+    Read more about [HTTP/1.1 Method Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).
+
+    | Method      | Details                                                    |
+    | ----------- | ---------------------------------------------------------- |
+    | GET         | Used to read a resource, be it a collection or an object. That is, it can be performed repeatedly without changing the state of the resource |
+    | POST        | Used for creating resources, or performing custom or batch type actions |
+    | PUT         | Used for updating resources or collections, but can also be used to create a resource when the key has been predetermined. Note that `PUT` apply to the entire resource and not just parts of it. So, when doing a `PUT` operation, the entire resource is replaced |
+    | DELETE      | Used for deleting resources. Delete is atomic and acts on the whole resource, that is it can not be used to delete a part or alter the state of a resource. Use `PUT` for that |
+
+    # Resource Types
+    There are two main types of resources – objects and collections of objects, they are individually outlined in the following sections.
+    It can generally be said that if a URL ends with a unique identifier (also known as a key), it is an object or a sub-object. Resources ending with collection names are collection resources.
+
+    ## Object Resources
+    Objects represent a logical unit, such as Flow, User, etc.
+
+    An example: */v1/flow/k-K23msoSDFJ0cGzB_xseY*
+
+    ### Allowed Methods
+    **GET**
+    Read the representation of an object as it is accessible and viewable by you.
+
+    **PUT**
+    Update the object. If the object doesn’t already exist, it is created.
+
+    **PATCH**
+    Update the object with the specified attributes.
+
+    **DELETE**
+    Irreversably delete the designated resource from the entire system. This operation will in most cases be illegal for regular API consumers.
+
+    ## Collection Resources
+    Collections are conceptually lists of objects, that can be queried. Queries without any parameters will cause a listing of the keys that are used to identify the objects within the collection; adding parameters will either filter which keys show up or decorate the keys with the object they identify (in part or entirely).
+
+    An example: */public/feed*
+
+    ### Allowed Methods
+    **GET**
+    List objects under the Collection, either all or using filters to search.
+
+    **POST**
+    Create a new object under the Collection.
+
+    ## Filters
+    In order to facilitate filtering/searching amongst the API objects, we provide the possibility to pass certain query string parameters that indicate which objects to include in the response and how they should be treated.
+
+    When searching for an object, it is suggested that you list the appropriate collection and add query parameters for the features of the object(s) you are trying to find in the URI. For example, when looking at a large flow and you want to return the first 15 Content, the resulting URL would be as follows `/v1/flow/<FLOWKEY>/?postsPerPage=15`
+
+    # Errors
+
+    Flowbox uses conventional HTTP response codes to indicate the success or failure of an API request. In general: Codes in the `2xx` range indicate success. Codes in the `4xx` range indicate an error that failed given the information provided (e.g., a required parameter was omitted, invalid data, etc.). Codes in the `5xx` range indicate an error with Flowbox's servers (these are rare).
+
+    ## Error handling
+
+    The integrator needs proper handling of common errors. Errors can happen at any stage and Flowbox will report back to let the integrator take appropriate action.
+
+tags:
+  - name: "Flow API"
+    description: Endpoints to work with Flows
+
+x-tagGroups:
+  - name: Flow API
+    tags:
+      - "Flow API"
+
+paths:
+  # ##############################################
+  # GET /public/feed/<FLOWKEY>
+  # ##############################################
+  /public/feed/{flowKey}:
+    get:
+      tags:
+        - "Flow API"
+      summary: Return a Flow
+      operationId: Return Flow
+      description: |
+        This resource is used to return a Flow for a Company. It will return the number of Content specified by the `postsPerPage` or by default `29` Content. To paginate (i.e. fetch more Content) you use an URL-encoded cursor (JSON Object) (which is available in all responses) and consists of the flows key(`flowKey`), the key of the last Content(`key`), and the last entry's publication date (`publishedAt`):
+          ```json
+          "cursor" :
+            { "feedKey"     : "abcdefg123456"
+            , "key"         : "654321gfedcba"
+            , "publishedAt" : "<date_and_time>"
+            }
+          ```
+        The cursor should then be passed in like this: `?cursor=<URL_ENCODED_CURSOR_OBJECT>`
+      parameters:
+        - in: path
+          name: flowKey
+          required: true
+          schema:
+            type: string
+          description: |
+            The [Flow key](/docs/terminology#flow-key).
+        - in: query
+          name: postsPerPage
+          schema:
+            type: int
+          description: Number of posts to fetch for each iteration
+        - in: query
+          name: cursor
+          schema:
+            type: string
+          description: The URL-encoded JSON Object Cursor to control pagination
+
+      responses:
+        200:
+          description: List of Content contained within the Flow
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Flow"
+
+components:
+  schemas:
+
+    # ##############################################
+    # SCHEMA Flow
+    # ##############################################
+    Flow:
+      type: object
+      properties:
+        posts:
+          type: array
+          description: List of Content objects
+          items:
+            type: object
+
+        pinned:
+          type: array
+          description: List of pinned Content
+          items:
+            type: object
+        cursor:
+          type: object
+          description: The cursor that is to be used with subsequent page calls
+          properties:
+            key:
+              type: string
+              example: "2021-10-27T07:47:51.768384"
+        settings:
+          type: object
+          description: Flow Settings
+          properties:
+            theme:
+              type: string
+              example: "tile-grid"
+            customCss:
+              type: object
+            general:
+              type: object
+            elements:
+              type: object
+        products:
+          type: array
+      example:
+        posts:
+        - postType: approved
+          stateChangedAt: '2021-11-10T07:34:41.058443+0000'
+          likes: '623'
+          socialCommerceEnabled: false
+          mediaId: '17932498023490710'
+          postPermalink: https://www.instagram.com/p/CVjoidfseEW/
+          feedSourceSettingsKey: DJfeq23ljdfs3slJUJJE4A
+          imageUrl: https://scontent-lcy1-1.cdninstagram.com/v/t51.34000-15/23409i803_4423049832400427_6734015087628068140_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=8ae9d6&_nc_ohc=PjYH143b29gAX8eAjGF&_nc_ht=scontent-lcy1-1.cdninstagram.com&edm=AJ7ooaQEAAEE&oh=179398asd999a82740c1fc5b2de8f958&oe=6182B24D
+          objectId: '17324083098153216'
+          stylescore: '0.9637923082345591'
+          interactions: '670'
+          sourceName: instagram
+          media:
+          - type: image
+            url: https://cdn.flbx.io/aHR0dflkDFSoasdf098zdGFncmFtLmNvbS9wL0NWanVOZUhxbkFXLw==/thumbnail_512
+            fallbackUrl: https://scontent-lcy1-1.cdninstagram.com/v/t51.34000-15/23409i803_4423049832400427_6734015087628068140_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=8ae9d6&_nc_ohc=PjYH143b29gAX8eAjGF&_nc_ht=scontent-lcy1-1.cdninstagram.com&edm=AJ7ooaQEAAEE&oh=179398asd999a82740c1fc5b2de8f958&oe=6182B24D
+          productKeys: '["PRODUCTKEY-fbYvcDoIQVGqR6laa0QaYA", "PRODUCTKEY-fopijsdafDAAD6laa0QaYA"]'
+          userName: uname
+          createdAt: '2021-11-10T07:34:35.934296+0000'
+          comments: '47'
+          text: "Instagram text #some #hash #tags"
+          feedKey: k-KoudsafopiASDzB_wqEQ
+          clickCountGate: '0'
+          publishedAt: '2021-10-28T04:01:57.000000+0000'
+          flowscore: '0.3298769777'
+          userPermalink: https://instagram.com/uname
+          key: Iu2nRssdfoi322sAAK8Nnw
+          clickCountCta: '0'
+          thumbnail:
+            url: https://cdn.flbx.io/aHR0dflkDFSoasdf098zdGFncmFtLmNvbS9wL0NWanVOZUhxbkFXLw==/thumbnail_512
+            fallbackUrl: https://scontent-lcy1-1.cdninstagram.com/v/t51.34000-15/23409i803_4423049832400427_6734015087628068140_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=8ae9d6&_nc_ohc=PjYH143b29gAX8eAjGF&_nc_ht=scontent-lcy1-1.cdninstagram.com&edm=AJ7ooaQEAAEE&oh=179398asd999a82740c1fc5b2de8f958&oe=6182B24D
+        pinned: []
+        cursor:
+          key: '2021-10-27T07:47:51.768384'
+        settings:
+          theme: tile-grid
+          customCss: {}
+          general:
+            likesAndComments:
+              value: true
+            largeCards:
+              value: true
+            minimalistic:
+              value: true
+            sameSizeCards:
+              value: false
+            fixedHeight:
+              value: ''
+              children:
+                height:
+                  value: 400
+            staticColumns:
+              value: false
+              children:
+                columnCount:
+                  value: 4
+            staticRows:
+              value: false
+              children:
+                rowCount:
+                  value: 3
+            containerWidth:
+              value: ''
+            backgroundColor:
+              value: "#F3F3F3"
+            infiniteScroll:
+              value: false
+            fontFamily:
+              value: _inherit
+            gutterSize:
+              value: 0
+            postCount:
+              value: 100
+            displayLimit:
+              value: false
+              children:
+                postsToShow:
+                  value: 8
+            slidesToShow:
+              value: false
+              children:
+                slidesToShow:
+                  value: 3
+            mobileSlidesToShow:
+              value: false
+              children:
+                mobileSlidesToShow:
+                  value: 2
+            highlightTimeout:
+              value: 8
+          elements:
+            autoplayVideos:
+              value: false
+            loadMoreButton:
+              value: true
+              children:
+                backgroundColor:
+                  value: "#000000"
+                color:
+                  value: "#FFFFFF"
+                rounded:
+                  value: 0
+            postText:
+              value: true
+            postTextGate:
+              value: true
+            postInteractivity:
+              value: true
+            fontSize:
+              value: 10
+            headerCentered:
+              value: false
+            backgroundColor:
+              value:
+            color:
+              value:
+            hashtagColor:
+              value:
+            contributorDetails:
+              value: true
+              children:
+                profileImage:
+                  value: true
+                platformIcon:
+                  value: true
+                postInteractivity:
+                  value: true
+                displayName:
+                  value: true
+                postAge:
+                  value: false
+            banner:
+              value: false
+              children:
+                tagline:
+                  value: Tagline
+                title:
+                  value: Title
+                backgroundColor:
+                  value: "#FFFFFF"
+                taglineColor:
+                  value: "#000000"
+                titleColor:
+                  value: "#000000"
+                taglineFontSize:
+                  value: 10
+                titleFontSize:
+                  value: 10
+                sourceIconColor:
+                  value:
+                position:
+                  value: top
+                paddingSize:
+                  value:
+                logoUrl:
+                  value:
+                hideLogoMobile:
+                  value: false
+            products:
+              value: true
+              children:
+                title:
+                  value: Shoppa stilen
+                buttontext:
+                  value: Shop now
+                show_price:
+                  value: true
+                sales_price:
+                  value: true
+                sales_badge:
+                  value: false
+                badge_text:
+                  value: text
+                productAvailabilityBehavior:
+                  value: none
+                hidePostsWithoutProducts:
+                  value: false
+            ratings:
+              value: false
+              children:
+                threshold:
+                  value: '0.00'
+                show_number_of_reviews:
+                  value: false
+            socialCommerceButtonBackgroundColor:
+              value: "#ffa55f"
+            socialCommerceButtonColor:
+              value: "#FFFFFF"
+            socialCommerceButtonRounded:
+              value: 0
+            socialCommerceButtonPosition:
+              value: top
+        products:
