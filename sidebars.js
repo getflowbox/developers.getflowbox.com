@@ -4,17 +4,20 @@
 const sidebars = {
   docs: [
     'overview',
+    'quickstart',
     'terminology',
+    'supported_platforms',
     {
       type: 'category',
-      label: 'Widget Integration',
+      label: 'Widget Integration Reference',
       collapsed: false,
       items: [
-        'quickstart',
+        'dynamic_flows',
         'localization',
         'analytics',
         'browsersupport',
         'performance',
+        'csp',
       ],
     },
   ],
@@ -26,7 +29,7 @@ const sidebars = {
       collapsed: false,
       items: [
         'guides/magento',
-        'guides/salesforce',
+        'guides/shopware',
         'guides/shopify',
       ],
     },

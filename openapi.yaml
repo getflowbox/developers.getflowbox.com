@@ -42,22 +42,6 @@ info:
     | ------------ | -------------------------------- |
     | 2021-12-24   | Release of Flowbox API Version 1 |
 
-    # Terminology
-    ### Content
-    Content is a singular item, such as (but not limited to):
-    * Instagram Post
-    * Facebook Post
-    * Pintrest pin
-
-    ### Flow
-    A Flow is a collection of Content, usually Curated and with added Metadata.
-
-    ### Metadata
-    is data about data or information about data. Originally, the concept of meta-information, ie information about information. Normally metadata describes the content and / or structure for a given data collection from any perspective.
-
-    ### Json
-    Json or JavaScript Object Notation is a structured approach to data management. Similar to XML but much simpler and easier to read. JSON is the default serialization format  within the Flowbox system. JSON have a limited set of types and close attention needs to be paid to the correct JSON-type for metadata when interacting with the API.
-
     # Conventions
     ## Date & Time
     Flowbox encodes and decodes all dates and times as [ISO 8601](http://www.w3.org/TR/NOTE-datetime) values. The format looks like `YYYY-MM-DDThh:mm:ss.sTZD`, example `1970-01-01T23:25:10.0330000+01:00` where:
