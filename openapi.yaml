@@ -2,7 +2,7 @@
 openapi: 3.0.1
 
 servers:
-  - url: https://api.flbx.io
+  - url: https://gateway.getflowbox.com
     description: Production environment
   - url: https://api.sandbox.flbx.io
     description: Sandbox environment
@@ -101,7 +101,7 @@ info:
     ### Production environment
     The API endpoint for the production environment can be found at
 
-    `https://api.flbx.io`
+    `https://gateway.getflowbox.com`
 
     The production environment should only be used for sending real data, not for testing of any sort. For testing, please refer to Sandbox.
 
@@ -119,23 +119,17 @@ info:
 
     ### Endpoint
 
-    - `https://api.flbx.io` - for Production
+    - `https://gateway.getflowbox.com` - for Production
     - `https://api.sandbox.flbx.io` - for Sandbox
 
-    ### Version
-    `/VERSION`
-
     ### Resource
-    `/flow/FLOWKEY`
+    `/public/feed/FLOWKEY`
 
     ### Parameters
     `/?QUERYSTRING`
 
     ## Unit Fields
     The units have parameterized fields, which allow you to change their respective meanings, those fields are briefly described below.
-
-    ### VERSION
-    Current API version is `v1`
 
     ### KEY
     The identifier of an object in a collection, its ID, if you will.
@@ -188,7 +182,7 @@ info:
     ## Collection Resources
     Collections are conceptually lists of objects, that can be queried. Queries without any parameters will cause a listing of the keys that are used to identify the objects within the collection; adding parameters will either filter which keys show up or decorate the keys with the object they identify (in part or entirely).
 
-    An example: */v1/flow*
+    An example: */public/feed*
 
     ### Allowed Methods
     **GET**
@@ -210,51 +204,54 @@ info:
 
     The integrator needs proper handling of common errors. Errors can happen at any stage and Flowbox will report back to let the integrator take appropriate action.
 
-    ## Error Messages
-
-    When the Flowbox API returns error messages, it does so in a extended JSON format.
-
-    > ### Example error response
-
-    ```json
-    { "??" : ??
-    }
-    ```
-
-    ## Error codes
-
-    In addition to descriptive error text, error messages contain machine-parseable codes. While the text for an error message may change, the codes will stay the same. The following table describes the codes which may appear when working with the API:
-
-    | ???? | ????????????? | ???????????? |
-    | ---- | ------------- | ------------ |
-    | ???? | ????????????? | ???????????? |
-
 tags:
   - name: "Flow API"
     description: Endpoints to work with Flows
-  - name: "Asset API"
-    description: Endpoints to work with Assets
 
 x-tagGroups:
   - name: Flow API
     tags:
       - "Flow API"
-  - name: Asset API
-    tags:
-      - "Asset API"
 
 paths:
   # ##############################################
-  # GET /v1/flow/<FLOWKEY>
+  # GET /public/feed/<FLOWKEY>
   # ##############################################
-  /v1/flow/{flowKey}:
+  /public/feed/{flowKey}:
     get:
       tags:
         - "Flow API"
       summary: Return a Flow
       operationId: Return Flow
       description: |
-        This resource is used to return a Flow for a Company. etc, etc..
+        This resource is used to return a Flow for a Company. It will return the number of Content specified by the `postsPerPage` or by default `29` Content. To paginate (i.e. fetch more Content) you use an URL-encoded cursor (JSON Object) (which is available in all responses) and consists of the flows key(`flowKey`), the key of the last Content(`key`), and the last entry's publication date (`publishedAt`):
+          ```json
+          "cursor" :
+            { "feedKey"     : "abcdefg123456"
+            , "key"         : "654321gfedcba"
+            , "publishedAt" : "<date_and_time>"
+            }
+          ```
+        The cursor should then be passed in like this: `?cursor=<URL_ENCODED_CURSOR_OBJECT>`
+      parameters:
+        - in: path
+          name: flowKey
+          required: true
+          schema:
+            type: string
+          description: |
+            The [Flow key](/docs/terminology#flow-key).
+        - in: query
+          name: postsPerPage
+          schema:
+            type: int
+          description: Number of posts to fetch for each iteration
+        - in: query
+          name: cursor
+          schema:
+            type: string
+          description: The URL-encoded JSON Object Cursor to control pagination
+
       responses:
         200:
           description: List of Content contained within the Flow
@@ -263,49 +260,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Flow"
 
-  # ##############################################
-  # GET /v1/asset/<ASSETKEY>
-  # ##############################################
-  /v1/asset/{assetKey}:
-    get:
-      tags:
-        - "Asset API"
-      summary: Return an Asset
-      operationId: Return Asset
-      description: |
-        This resource is used to return an Asset for a Company. etc, etc..
-      parameters:
-        - in: path
-          name: company_id
-          schema:
-            type: string
-        - in: path
-          name: product_id
-          schema:
-            type: string
-        - in: path
-          name: post_index
-          schema:
-            type: string
-        - in: path
-          name: catalog
-          schema:
-            type: string
-      responses:
-        200:
-          description: Return the asset corresponding to the supplied key
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Asset"
-
 components:
   schemas:
-    # ##############################################
-    # SCHEMA Asset
-    # ##############################################
-    Asset:
-      type: object
 
     # ##############################################
     # SCHEMA Flow
