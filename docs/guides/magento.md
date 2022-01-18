@@ -1,13 +1,13 @@
 ---
 id: magento
-title: Magento 2
+title: Magento 2 - Generic
 ---
 
 Flowbox is partnered with leading ecommerce platform Magento, to offer a first-class visual marketing experience for ecom sites.
 
 :::tip
 
-There is a Flowbox plugin available for Magento 2.0, which we strongly recommend to get the full Flowbox experience. Check out [this](https://help.getflowbox.com/en/articles/4605551-magento-2-0-plugin-installation-configuration) article to find out more.
+There is a Flowbox plugin available for Magento 2.0, which we strongly recommend to get the full Flowbox experience. Click [here](/docs/guides/magento_plugin) for that guide.
 
 :::
 

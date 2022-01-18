@@ -1,0 +1,118 @@
+---
+id: magento_plugin
+title: Magento 2 - Plugin
+---
+
+import ReactPlayer from 'react-player'
+
+Flowbox is partnered with leading ecommerce platform Magento, to offer a first-class visual marketing experience for ecom sites.
+
+## Install the Flowbox plugin for Magento 2.0
+The Flowbox plugin can be downloaded from the Magento Marketplace. There are three types of Flowbox integrations (widgets) available:
+
+1. Default (standard Flow).
+2. Dynamic Tag Flow.
+3. Dynamic Product Flow.
+
+:::note
+
+Don't have Magento 2? The Flowbox plugin is not supported for Magento 1 due to security reasons. If you are looking to upgrade to Magento 2, [get in touch](mailto:hello@getflowbox.com) and we will connect you with our expert partners.
+
+:::
+
+## Configure the Flowbox widget in Magento
+In order to use Flowbox in your Magento store, first, log in to your [Magento Webshop](https://account.magento.com/customer/account/login) admin account.
+
+The Flowbox integrations will be accessible via the `Widget` menu. Via the `Content` tab in the left-hand menu, you can select `Widgets` and then click on the `Add Widget` button.
+
+Then:
+
+1. Select `Flowbox Flow` in the first dropdown.
+2. Choose the current `Design Theme` that your webshop is using.
+3. Click on `Continue`.
+![](/img/docs/magento2_plugin/1.png)
+
+Following these steps, you can now:
+
+1. Name the Widget (such as Homepage Flow).
+2. Assign to Store Views. If you want the Flows to be added to all stores, or you only have one Store View, you can pick `All Store Views`.
+When you have multiple stores and want to have a specific Flow for each Store View, you can consider specifying the 'Widget Title' to the relevant Store View (_linked to the previous step_).
+3. With the `Sort Order` you can specify the order when there are multiple Flows on one page.
+![](/img/docs/magento2_plugin/2.png)
+
+### Widget options
+On the second tab on the left, you’ll see `Widget Options`. This is where you can choose which kind of Flowbox Widget we are going to make. Each option has its specific settings. We'll go through them one by one, starting with the default Flowbox widget (Standard Flow).
+
+### Flowbox widget: Default (Standard Flow)
+The configuration for the default widget is easy, you only need to add the ‘Flow Key’ in the proper field. There is also an option to disable `Lazy Loading` (read more about Lazy Loading [here](/docs/performance)) if you wish.
+![](/img/docs/magento2_plugin/3.png)
+
+### Flowbox widget: Dynamic Tag Flow
+For the `Dynamic Tag` widget, you will need to enter your [Flow key](/docs/terminology#flow-key) at the top, then your dynamic tag information, including what tags you wish to call (note: these must match in Flowbox).
+
+In the `Tag operator` drop-down menu you can select between `Any` or `All`.
+
+1. `Any` will serve all posts tagged with any of your selected tags. I.e., if you select the tags 'mountains', 'rock' and 'arctic', you will see all posts that have **any** of these tags, or a combination of them.
+2. `All` will only serve posts tagged with 'all' of your selected tags. I.e., if you select the tags 'mountains', 'rock' and 'arctic', you will see only see posts that have **all** three of these tags.
+
+You can also select if you wish to enable the `Show Tag Bar`. This is a feature that enables the visitor to filter content by the tags.
+![](/img/docs/magento2_plugin/4.png)
+
+On the frontend this will look like this:
+![](/img/docs/magento2_plugin/5.png)
+
+### Flowbox widget: Dynamic Product Flow
+For the `Dynamic Product` widget, you will need to enter your [Flow key](/docs/terminology#flow-key) at the top, then your product identifier, which will show specific products.
+
+In the `Product Identifier` field, add your product identifier, or leave it blank.
+
+If you have a widget placed on a content page or on a category page, the identifier could be a specific SKU for example. This will display a Flow for a specific product you’ve set in your Flowbox admin panel.
+
+If you use this for a product page, it's recommended to leave this field blank, so that Flowbox will pull dynamic content matching the product identifier on the page.
+
+The `Product Identifier Attribute` is mandatory. In the drop-down menu, you will see a choice of different kinds of attributes that will be used to identify the products you set in the Flowbox. You can also use a custom attribute. This should be an attribute that is available both in Magento and Flowbox. You should use the identifier that is named at `Stores > Product > Attributes` in the Magento admin settings.
+![](/img/docs/magento2_plugin/6.png)
+
+### Layout updates
+Once you've decided which type (Default, Dynamic Tag, or Dynamic Product) of Flowbox Flow will be contained in this widget, it's time to add a Layout Update.
+
+To open these settings, click on `Add Layout Update`. Then you'll need to decide what page you want your Flow to be displayed on.
+
+If you select `All Product Types`, this Flow will appear on all your product pages.
+![](/img/docs/magento2_plugin/7.png)
+
+You can also update the container placement on your page. Here, container refers to the box containing the Flowbox Flow. You can select to display your Flow before the page footer, in the page header, in the main content area, etc.
+
+In this example, we have chosen `All product types`, show on all product pages and show my widget before the page footer.
+![](/img/docs/magento2_plugin/8.png)
+
+Here you can see an example of the Dynamic Product Widget and a detailed view of the Flowbox gate when you click on one of those images.
+![](/img/docs/magento2_plugin/9.png)
+
+### Flowbox widget in CMS pages and blocks
+It is also possible to create a single widget from a page or block. To do this, first, you need to go into the admin settings of the page or block where you want the widget added.
+![](/img/docs/magento2_plugin/10.png)
+
+This works the same for both pages and blocks. You can open or create a new page. In this example, we use the ‘no route’ page also known as the ‘error 404 page’.
+
+Click on `Edit` and you can now place a widget and configure it as described above.
+![](/img/docs/magento2_plugin/11.png)
+![](/img/docs/magento2_plugin/12.png)
+
+:::note
+
+The difference between adding a widget directly into the page or block, and the way described in the beginning, is that here you can specify the Flowbox widget for this certain page or block. You will bypass the ‘Layout updates’ since you create this widget for this unique CMS content.
+:::
+
+By configuring a widget in the main settings (as described at the beginning) you can assign more general behaviour, which you can place via `Layout updates` on multiple pages in one configuration.
+
+The widget will now appear as an element in the content, as you can see below:
+![](/img/docs/magento2_plugin/13.png)
+
+<ReactPlayer playing controls url='https://youtu.be/0XrnkTL_jp8'/>
+
+:::tip
+
+All updates and edits to your Flowbox Flow (content, styling, tags) need to be made in your Flowbox Admin account.
+
+:::

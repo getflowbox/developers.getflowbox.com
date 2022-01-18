@@ -28,6 +28,7 @@ const sidebars = {
       label: 'Ecommerce Integration',
       collapsed: false,
       items: [
+        'guides/magento_plugin',
         'guides/magento',
         'guides/shopware',
         'guides/shopify',
