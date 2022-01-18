@@ -82,7 +82,7 @@ info:
     ???
 
     # Interacting with the API
-    All API access is performed over HTTPS through `api.flbx.io` or `api.sandbox.flbx.io` and data is sent and received as [JSON](http://www.json.org/). For trying out the API without touching live data we’ve set up a sandbox environment.
+    All API access is performed over HTTPS through `gateway.getflowbox.com` or `api.sandbox.flbx.io` and data is sent and received as [JSON](http://www.json.org/). For trying out the API without touching live data we’ve set up a sandbox environment.
     In order to ensure data privacy the following choices have been made, to name some that directly impact API workflows:
     Unencrypted HTTP is not supported, you will be redirected to the resource you tried to reach, with http replaced by https, if you attempt to use plain HTTP.
     Resources you have no right to see will either give you a describing status code or a `404`. `404` statuses are returned if the case is such that you don’t even have the right to know, according to the system's current state, if an object exists.
@@ -115,7 +115,7 @@ info:
     We usually deploy the latest production environment to our Sandbox, but may occasionally update it with newer builds, which may not be as reliable or well tested.
 
     ## URL Components
-    When constructing resource identifiers (URIs) it is best to consider them as being built with up to four discrete units. I.e. `Endpoint+Version+Resource+[Parameters]`, e.g. `https://api.sandbox.flbx.io/v1/flow/<FLOWKEY>?postsPerPage=29`
+    When constructing resource identifiers (URIs) it is best to consider them as being built with up to four discrete units. I.e. `Endpoint+Resource+[Parameters]`, e.g. `https://api.sandbox.flbx.io/public/feed/<FLOWKEY>?postsPerPage=29`
 
     ### Endpoint
 
