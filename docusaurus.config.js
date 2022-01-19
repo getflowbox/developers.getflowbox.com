@@ -17,14 +17,18 @@ const config = {
     [
       '@docusaurus/preset-classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
+      {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-      }),
+        googleAnalytics: {
+          trackingID: 'G-Z9DNTR61EM',
+          anonymizeIP: true,
+        },
+      },
     ],
     [
       'redocusaurus',
@@ -156,9 +160,6 @@ const config = {
       },
       prism: {
         theme: require('prism-react-renderer/themes/dracula'),
-      },
-      googleAnalytics: {
-        trackingID: 'G-Z9DNTR61EM'
       },
     }),
 };
