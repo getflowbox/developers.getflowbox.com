@@ -3,16 +3,23 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   docs: [
-    'overview',
-    'quickstart',
-    'terminology',
     'supported_platforms',
     {
       type: 'category',
-      label: 'Widget Integration Reference',
+      label: 'Getting Started',
       collapsed: false,
       items: [
-        'dynamic_flows',
+        'install_widget',
+        'install_analytics',
+        'dynamic_tag_flows',
+        'dynamic_product_flows',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'In-depth Knowledge',
+      collapsed: false,
+      items: [
         'localization',
         'analytics',
         'browsersupport',
@@ -20,6 +27,7 @@ const sidebars = {
         'csp',
       ],
     },
+    'terminology',
   ],
   guides: [
     'guides/overview',

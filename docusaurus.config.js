@@ -53,7 +53,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'overview',
+            docId: 'install_widget',
             position: 'left',
             label: 'Docs',
           },
