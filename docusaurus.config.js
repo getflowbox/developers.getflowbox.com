@@ -80,12 +80,12 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Quickstart',
-                to: '/docs/quickstart',
+                label: 'Getting Started',
+                to: '/docs/install_widget',
               },
               {
-                label: 'Overview',
-                to: '/docs/overview',
+                label: 'Guides',
+                to: '/docs/guides/overview',
               },
               {
                 label: 'Status',

@@ -24,6 +24,6 @@ Certain platforms do not support all Flowbox features. See the platform-specific
 
 **Is your platform not listed?**
 
-Don't worry, you can still integrate with Flowbox. Just use our generic integration solution. Learn more [here](/docs/quickstart)
+Don't worry, you can still integrate with Flowbox. Just use our generic integration solution. Learn more [here](/docs/install_widget)
 
 :::

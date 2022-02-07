@@ -20,7 +20,7 @@ In order to do this, follow these steps:
 2. Navigate to Admin Panel, click on `Content`, then `Configuration` ![](/img/docs/magento2/image1.png)
 3. Choose the store view that you want the head tag to be changed on or select Global to change it on every store view ![](/img/docs/magento2/image12.png)
 4. Scroll down to the ‘HTML Head’ section ![](/img/docs/magento2/image3.png)
-5. In the Scripts and Style Sheets field, add the [embed snippet](/docs/quickstart#embed-snippet) ![](/img/docs/magento2/image9.png)
+5. In the Scripts and Style Sheets field, add the [embed snippet](/docs/install_widget) ![](/img/docs/magento2/image9.png)
 5. Once you’ve added your script, click on the `Save Configuration` button
 6. It is always recommended to [flush the cache](#flush-the-cache) in Magento after each update
 
@@ -41,7 +41,7 @@ It’s very easy to embed a Static Flow on a Page in Magento 2. This would be a 
 2. Click on `Add New Page` ![](/img/docs/magento2/image10.png)
 3. **Important step!** Make sure you enable the page (green toggle), before clicking on `Content` to edit the page ![](/img/docs/magento2/image6.png)
 4. Once in Content view, click on `Show/Hide Editor` to be able to embed the script ![](/img/docs/magento2/image11.png)
-5. Now you can paste the [embed init snippet](/docs/quickstart#embed-init-snippet) into the main text box ![](/img/docs/magento2/image13.png)
+5. Now you can paste the [embed init snippet](/docs/install_widget) into the main text box ![](/img/docs/magento2/image13.png)
 6. Once you’ve completed step 5, click on the orange `Save` button. **Note:** Magento recommends [flushing the cache](#flush-the-cache) after each update.
 
 ### Embed a Dynamic Flow in a Page
