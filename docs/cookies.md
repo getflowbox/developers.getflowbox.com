@@ -11,8 +11,24 @@ A cookie is a message in the form of a small text file that a website places on 
 
 Flowbox uses different categories of cookies to enhance your experience and make your visit on our website as pleasant as possible.
 
- We may use these technologies to collect information about how you use the Service, for example which pages you go to most often and if you get error messages from certain pages.
+We may use these technologies to collect information about how you use the Service, for example which pages you go to most often and if you get error messages from certain pages.
 
+## Disabling cookies
+
+In some scenarios, such as User declining Consent to Cookies the variable `allowCookies` can be used to control the use of cookies.
+
+```html
+<div id="js-flowbox-flow"></div>
+<script>
+  window.flowbox('init', {
+    container: '#js-flowbox-flow',
+    key: 'Your-Flow-Key',
+    allowCookies: false,
+  })
+</script>
+```
+
+* The `allowCookies` property is a boolean that can be used to control if cookies are to be set or not. `false` means that Cookies should **not** be set whereas `true` is the default and means that cookies **should** be set.
 
 ## Conversion Tracking
 When a customer interacts with your site where Flowbox is used, a cookie is created.
