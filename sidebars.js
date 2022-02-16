@@ -23,6 +23,7 @@ const sidebars = {
         'localization',
         'analytics',
         'browsersupport',
+        'cookies',
         'performance',
         'csp',
       ],
